@@ -10,16 +10,14 @@ import { RouterLink, RouterView } from 'vue-router'
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">Translator</a>
+              <RouterLink class="nav-link" to="/translatorsList">Translator</RouterLink>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Document</a>
+              <RouterLink class="nav-link" to="/translatorsList">Document</RouterLink>
             </li>
           </ul>
         </div>
       </div>
-      <!-- <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink> -->
     </nav>
   </header>
 
