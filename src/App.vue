@@ -27,7 +27,8 @@ import { RouterLink, RouterView } from 'vue-router'
 <style>
 .navbar {
   background-color: #F86011 !important;
-  margin-bottom: 24px
+  margin-bottom: 24px;
+  max-height: 70px;
 }
 
 .container-fluid {

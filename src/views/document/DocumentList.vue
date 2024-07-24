@@ -7,17 +7,25 @@ export default {
             documents: [],
             currentPage: 0,
             totalPages: 0,
+            totalELements: 0,
             // icon button elements
             elements: {
                 iconButtonNextEl: '',
                 iconNextEl: '',
                 iconButtonPreviousEl: '',
                 iconPreviousEl: ''
-            }
+            },
+            savedChanges: false,
+            alertTitle: ''
         }
     },
 
     created() {
+        // Data received from the router to indicate changes that have been saved
+        this.savedChanges = history.state.savedChanges
+        this.alertTitle = history.state.title
+        history.state.savedChanges = false
+        history.state.title = ''
         // Calls the data fetch method during component creation
         this.fetchDocuments()
     },
@@ -33,6 +41,7 @@ export default {
                 .then(response => {
                     this.documents = response.data.content
                     this.totalPages = response.data.page.totalPages
+                    this.totalELements = this.documents.length
                 })
                 .catch(error => {
                     console.log(error)
@@ -65,15 +74,19 @@ export default {
             this.elements.iconButtonNextEl = document.querySelector('#icon-button-next')
             this.elements.iconNextEl = this.elements.iconButtonNextEl.querySelector('#icon-next')
             this.elements.iconButtonPreviousEl = document.querySelector('#icon-button-previous')
-            this.elements.iconPreviousEl = 
-            this.elements.iconButtonPreviousEl.querySelector('#icon-previous')
+            this.elements.iconPreviousEl =
+                this.elements.iconButtonPreviousEl.querySelector('#icon-previous')
 
             // Validates the currentPage limit and changes the style of the next and previous page 
             // buttons to disable them in case there is no previous or next page available
-            if (this.currentPage == this.totalPages - 1) {
+            if (this.currentPage === 0) {
+                if (this.totalPages === 1) {
+                    this.setButtonStyle('default', 'default', 'gray', 'gray')
+                } else {
+                    this.setButtonStyle('default', 'pointer', 'gray', '#333379')
+                }
+            } else if (this.currentPage === this.totalPages - 1) {
                 this.setButtonStyle('pointer', 'default', '#333379', 'gray')
-            } else if (this.currentPage == 0) {
-                this.setButtonStyle('default', 'pointer', 'gray', '#333379')
             } else {
                 this.setButtonStyle('pointer', 'pointer', '#333379', '#333379')
             }
@@ -97,11 +110,19 @@ export default {
                 await axios.delete(
                     `http://localhost:8080/document/${documentId}`
                 )
+                this.savedChanges = true
+                this.alertTitle = 'Document deleted successfully'
+                if (this.totalELements === 1) {
+                    this.currentPage--
+                }
                 this.fetchDocuments()
-
             } catch (error) {
                 console.log(error)
             }
+        },
+
+        closeAlertSuccess() {
+            this.savedChanges = false
         }
     }
 }
@@ -111,10 +132,20 @@ export default {
     <main class="container">
         <div class="bg-body-tertiary p-5 rounded">
             <h1>
-                Management system
+                Document list
             </h1>
+
+            <p class="lead">
+                You can view all saved documents. It is possible to delete and change a document's data.
+            </p>
+
             <div id="header-content">
                 <RouterLink class="btn btn-primary" to="/newDocument">New Document</RouterLink>
+                <!-- Alert message shown to confirm saved changes -->
+                <div class="alert alert-success alert-dismissible" role="alert" v-if="savedChanges">
+                    <div>{{ alertTitle }}</div>
+                    <button type="button" class="btn-close" v-on:click="closeAlertSuccess"></button>
+                </div>
             </div>
             <hr>
             <!-- Document table -->
@@ -145,7 +176,7 @@ export default {
                 </tbody>
             </table>
             <!-- Previous and next page buttons made with svg images-->
-            <div id="icon-content">
+            <div id="icon-content-document">
                 <span class="icon-button" id="icon-button-previous" title="Previous Page"
                     v-on:click.prevent="previousPage">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
@@ -167,12 +198,15 @@ export default {
 </template>
 
 <style>
-
 #header-content {
-    margin-top: 20px;
+    margin-top: 0 !important;
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.lead {
+    margin-bottom: 10px;
 }
 
 .alert {
@@ -209,11 +243,11 @@ export default {
     cursor: pointer;
 }
 
-#icon-content {
+#icon-content-document {
     display: flex;
     justify-content: flex-end;
     gap: 15px;
-    padding-right: 20px;
+    padding-right: 52px;
 }
 
 .bi {

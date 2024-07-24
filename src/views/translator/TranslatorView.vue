@@ -11,14 +11,16 @@ export default {
   },
   data() {
     return {
+      title: '',
+      subtitle: '',
       // Translator data
       translator: {
         name: '',
         email: '',
         source_language: '',
         target_language: ''
-      }
-
+      },
+      isDisabled: false
     }
   },
   // Define properties that are computed based on other data properties
@@ -33,14 +35,24 @@ export default {
   methods: {
     async send() {
       try {
+        let alertTitle = ''
         if (this.isEdit) {
           await axios.put(`http://localhost:8080/translator/${this.id}`,
             this.translator);
+            alertTitle = 'Translator updated successfully'
         } else {
           await axios.post('http://localhost:8080/translator', this.translator);
+          alertTitle = 'Translator saved successfully'
         }
+
         // Redirects to the translator list
-        this.$router.push('/translatorList')
+        this.$router.push({
+          path: '/translatorList',
+          state: {
+            savedChanges: true,
+            title: alertTitle
+          }
+        })
       } catch (error) {
         console.log(error)
       }
@@ -81,8 +93,14 @@ export default {
   },
   created() {
     if (this.isEdit) {
+      this.isDisabled = true
+      this.title = 'Edit Translator'
+      this.subtitle = 'It is not allowed to change an email once it has been saved. If you want, you can delete the data'
       // Calls the data fetch method during component creation
       this.fetchTranslator();
+    } else {
+      this.title = 'Save Translator',
+      this.subtitle = 'Register to be able to save documents. You can change or remove your data later'
     }
   }
 }
@@ -93,11 +111,11 @@ export default {
   <main class="container">
     <div class="bg-body-tertiary p-5 rounded">
       <h1>
-        Management system
+        {{title}}
       </h1>
 
       <p class="lead">
-        This example is a quick exercise to illustrate how the top-aligned navbar works
+        {{ subtitle }}
       </p>
 
       <!-- Form data -->
@@ -113,7 +131,7 @@ export default {
         <div class="mb-3">
           <label for="input2" class="form-label">Email address</label>
           <input type="email" required v-model="translator.email" class="form-control" id="input2"
-            placeholder="name@example.com">
+            placeholder="name@example.com" :disabled="isDisabled">
           <div class="invalid-feedback">
             Please provide a valid email.
           </div>
@@ -122,7 +140,7 @@ export default {
           <div class="col">
             <label for="input3" class="form-label">Source Language</label>
             <input type="text" required v-model="translator.source_language" class="form-control"
-              placeholder="Ex: pt-BR" id="input3" aria-label="First name">
+              placeholder="Ex: pt-BR" id="input3">
             <div class="invalid-feedback">
               Please provide a language.
             </div>
@@ -130,7 +148,7 @@ export default {
           <div class="col">
             <label for="input4" class="form-label">Target Language</label>
             <input type="text" required v-model="translator.target_language" class="form-control"
-              placeholder="Ex: es-ES" id="input4" aria-label="Last name">
+              placeholder="Ex: es-ES" id="input4">
             <div class="invalid-feedback">
               Please provide a language.
             </div>
