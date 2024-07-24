@@ -86,6 +86,7 @@ export default {
                     if (!form.checkValidity()) {
                         event.preventDefault()
                         event.stopPropagation()
+                        form.querySelector(".invalid-feedback").style.display = "block"
                         form.classList.add('was-validated')
                     } else {
                         event.preventDefault()
@@ -116,6 +117,14 @@ export default {
         closeAlert() {
             // When the user closes the alert message returns hasError to its original value
             this.hasError = false
+        },
+
+        fileUpload(event) {
+            // Validates that a file was chosen to remove invalid feedback 
+            const file = event.target.files[0]
+            if (file) {
+                document.querySelector(".invalid-feedback").style.display = "none"
+            }
         }
     },
     mounted() {
@@ -154,9 +163,10 @@ export default {
 
             <div v-if="!isEdit">
                 <form novalidate class="needs-validation">
-                    <div class="mb-3">
+                    <div class="mb-3 file-content">
                         <label for="formFile" class="form-label">Ex: document.csv</label>
-                        <input class="form-control form-control-lg custom-file-label" type="file" id="formFile" name="file" accept=".csv" required>
+                        <input v-on:change="fileUpload" class="form-control form-control-lg" type="file" id="formFile"
+                            name="file" accept=".csv" required>
                     </div>
                     <div class="invalid-feedback">
                         Please choose a file
@@ -240,6 +250,10 @@ h1 {
     text-align: center;
 }
 
+.file-content {
+    margin-bottom: 0px !important;
+}
+
 .submit-btn {
     margin-top: 20px !important;
 }
@@ -249,5 +263,4 @@ h1 {
     flex-direction: column;
     align-items: flex-end;
 }
-
 </style>
