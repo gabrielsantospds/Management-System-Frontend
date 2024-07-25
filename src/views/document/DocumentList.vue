@@ -253,7 +253,7 @@ export default {
     gap: 15px;
 }
 
-.icon-img {
-    color: gray;
+.bi {
+    color: #333379;
 }
 </style>
