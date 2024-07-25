@@ -4,7 +4,9 @@ export default {
 
     methods: {
         goToAnotherPage(path) {
-            this.$router.push(path)
+            this.$router.replace({
+                path: path
+            })
         }
     }
 }
@@ -13,7 +15,7 @@ export default {
 
 <template>
     <div class="container py-4">
-        <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+        <div class="p-5 mb-4 bg-body-tertiary rounded-3 big-content">
             <div class="container-fluid py-5">
                 <h1 class="display-5 fw-bold">
                     Translator and Document <br> Management System
@@ -43,7 +45,7 @@ export default {
                     </h2>
                     <p>
                     </p>
-                    <button class="btn btn-outline-secondary" v-on:click="goToAnotherPage('newTranslator')">
+                    <button class="btn btn-outline-secondary" v-on:click="goToAnotherPage('/newTranslator')">
                         Register
                     </button>
                 </div>
@@ -58,7 +60,7 @@ export default {
     padding-top: 0px !important;
 }
 
-.mb-4 {
+.big-content {
     padding: 48px 120px !important;
 }
 

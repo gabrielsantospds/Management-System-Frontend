@@ -102,7 +102,9 @@ export default {
 
         goToEdit(documentId) {
             // Redirects to document edit page
-            this.$router.push(`editDocument/${documentId}`)
+            this.$router.replace({
+                path: `/editDocument/${documentId}`
+            })
         },
 
         async deleteDocument(documentId) {
@@ -149,32 +151,34 @@ export default {
             </div>
             <hr>
             <!-- Document table -->
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <td><b>SUBJECT</b></td>
-                        <td><b>CONTENT</b></td>
-                        <td><b>LOCALE</b></td>
-                        <td><b>AUTHOR</b></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="document in documents" :key="document.id">
-                        <td>{{ document.subject }}</td>
-                        <td>{{ document.content }}</td>
-                        <td>{{ document.locale }}</td>
-                        <td>{{ document.author }}</td>
-                        <td>
-                            <a class="btn btn-sm btn-secondary" v-on:click="goToEdit(document.id)">Edit</a>
-                        </td>
-                        <td>
-                            <a class="btn btn-sm btn-secondary" v-on:click="deleteDocument(document.id)">Delete</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-container">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <td><b>SUBJECT</b></td>
+                            <td><b>CONTENT</b></td>
+                            <td><b>LOCALE</b></td>
+                            <td><b>AUTHOR</b></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="document in documents" :key="document.id">
+                            <td>{{ document.subject }}</td>
+                            <td>{{ document.content }}</td>
+                            <td>{{ document.locale }}</td>
+                            <td>{{ document.author }}</td>
+                            <td>
+                                <a class="btn btn-sm btn-secondary" v-on:click="goToEdit(document.id)">Edit</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-sm btn-secondary" v-on:click="deleteDocument(document.id)">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <!-- Previous and next page buttons made with svg images-->
             <div id="icon-content-document">
                 <span class="icon-button" id="icon-button-previous" title="Previous Page"
@@ -218,6 +222,10 @@ export default {
     padding: 15px !important;
 }
 
+.table-container {
+    overflow: auto;
+}
+
 .table {
     margin-bottom: 8px
 }
@@ -247,7 +255,6 @@ export default {
     display: flex;
     justify-content: flex-end;
     gap: 15px;
-    padding-right: 52px;
 }
 
 .bi {

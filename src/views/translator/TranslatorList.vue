@@ -103,7 +103,9 @@ export default {
 
         goToEdit(translatorId) {
             // Redirects to traslator edit page
-            this.$router.push(`editTranslator/${translatorId}`)
+            this.$router.replace({
+                path: `/editTranslator/${translatorId}`
+            })
         },
 
         async deleteTranslator(translatorId) {
@@ -167,32 +169,34 @@ export default {
             </div>
             <hr>
             <!-- Translator table -->
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <td><b>NAME</b></td>
-                        <td><b>EMAIL</b></td>
-                        <td><b>SOURCE LANGUAGE</b></td>
-                        <td><b>TARGET LANGUAGE</b></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="translator in translators" :key="translator.id">
-                        <td>{{ translator.name }}</td>
-                        <td>{{ translator.email }}</td>
-                        <td>{{ translator.source_language }}</td>
-                        <td>{{ translator.target_language }}</td>
-                        <td>
-                            <a class="btn btn-sm btn-secondary" v-on:click="goToEdit(translator.id)">Edit</a>
-                        </td>
-                        <td>
-                            <a class="btn btn-sm btn-secondary" v-on:click="deleteTranslator(translator.id)">Delete</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-container">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <td><b>NAME</b></td>
+                            <td><b>EMAIL</b></td>
+                            <td><b>SOURCE LANGUAGE</b></td>
+                            <td><b>TARGET LANGUAGE</b></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="translator in translators" :key="translator.id">
+                            <td>{{ translator.name }}</td>
+                            <td>{{ translator.email }}</td>
+                            <td>{{ translator.source_language }}</td>
+                            <td>{{ translator.target_language }}</td>
+                            <td>
+                                <a class="btn btn-sm btn-secondary" v-on:click="goToEdit(translator.id)">Edit</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-sm btn-secondary" v-on:click="deleteTranslator(translator.id)">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <!-- Previous and next page buttons made with svg images-->
             <div id="icon-content-translator">
                 <span class="icon-button" id="icon-button-previous" title="Previous Page"
@@ -236,6 +240,10 @@ export default {
     padding: 15px !important;
 }
 
+.table-container {
+    overflow: auto;
+}
+
 .table {
     margin-bottom: 8px
 }
@@ -265,7 +273,6 @@ export default {
     display: flex;
     justify-content: flex-end;
     gap: 15px;
-    padding-right: 20px;
 }
 
 .bi {

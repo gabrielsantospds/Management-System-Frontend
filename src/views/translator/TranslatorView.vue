@@ -36,6 +36,7 @@ export default {
     async send() {
       try {
         let alertTitle = ''
+        this.changeButtonText()
         if (this.isEdit) {
           await axios.put(`http://localhost:8080/translator/${this.id}`,
             this.translator);
@@ -46,7 +47,7 @@ export default {
         }
 
         // Redirects to the translator list
-        this.$router.push({
+        this.$router.replace({
           path: '/translatorList',
           state: {
             savedChanges: true,
@@ -54,6 +55,7 @@ export default {
           }
         })
       } catch (error) {
+        this.resetButtonText()
         console.log(error)
       }
     },
@@ -85,7 +87,25 @@ export default {
         console.log(error)
       }
 
-    }
+    },
+
+    changeButtonText() {
+            // Change the button to let the user aware about the data being processed
+            const btnElement = document.querySelector('.submit-btn')
+            if (btnElement) {
+                btnElement.textContent = 'Loading...'
+                btnElement.disabled = true
+            }
+        },
+
+        resetButtonText() {
+            // Returns the button's original style in case of request failed 
+            const btnElement = document.querySelector('.submit-btn')
+            if (btnElement) {
+                btnElement.textContent = 'Submit'
+                btnElement.disabled = false
+            }
+        }
   },
   mounted() {
     this.validation()
@@ -95,7 +115,7 @@ export default {
     if (this.isEdit) {
       this.isDisabled = true
       this.title = 'Edit Translator'
-      this.subtitle = 'It is not allowed to change an email once it has been saved. If you want, you can delete the data'
+      this.subtitle = 'It is not allowed to change the saved email, but you can remove tha data and make a new registration'
       // Calls the data fetch method during component creation
       this.fetchTranslator();
     } else {

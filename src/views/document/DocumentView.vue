@@ -35,10 +35,12 @@ export default {
     methods: {
         async editDocument() {
             try {
+                this.changeButtonText()
                 await axios.put(`http://localhost:8080/document/${this.id}`,
                     this.document);
+                    
                 // Redirects to the translator list
-                this.$router.push({
+                this.$router.replace({
                     path: '/documentList',
                     state: {
                         savedChanges: true,
@@ -46,6 +48,7 @@ export default {
                     }
                 })
             } catch (error) {
+                this.resetButtonText()
                 const errorCode = error.response.status
                 if (errorCode === 400) {
                     // Error code 400 means that the email sent does not exist in the database
@@ -58,6 +61,7 @@ export default {
 
         async uploadDocument(file) {
             try {
+                this.changeButtonText()
                 const formData = new FormData()
                 formData.append('file', file)
                 const response = await axios.post('http://localhost:8080/document', formData, {
@@ -65,8 +69,9 @@ export default {
                         'Content-Type': 'multipart/form-data'
                     }
                 });
+
                 // Redirects to the document list
-                this.$router.push({
+                this.$router.replace({
                     path: '/documentList',
                     state: {
                         savedChanges: true,
@@ -74,6 +79,7 @@ export default {
                     }
                 })
             } catch (error) {
+                this.resetButtonText()
                 console.log(error)
             }
 
@@ -124,6 +130,24 @@ export default {
             const file = event.target.files[0]
             if (file) {
                 document.querySelector(".invalid-feedback").style.display = "none"
+            }
+        },
+
+        changeButtonText() {
+            // Change the button to let the user aware about the data being processed
+            const btnElement = document.querySelector('.submit-btn')
+            if (btnElement) {
+                btnElement.textContent = 'Loading...'
+                btnElement.disabled = true
+            }
+        },
+
+        resetButtonText() {
+            // Returns the button's original style in case of request failed 
+            const btnElement = document.querySelector('.submit-btn')
+            if (btnElement) {
+                btnElement.textContent = 'Submit'
+                btnElement.disabled = false
             }
         }
     },

@@ -1,19 +1,41 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router'
+
+export default {
+
+  methods: {
+    goToAnotherPage(path) {
+
+      this.$router.replace({
+        path: path
+      })
+    }
+  }
+}
+
 </script>
 
 <template>
   <header>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
       <div class="container-fluid">
-        <p class="brand">Management <br>System</p>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <a class="navbar-brand" href="#" v-on:click="goToAnotherPage('/homepage')">Home</a>
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon">
+
+          </span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <RouterLink class="nav-link" to="/translatorList">Translator</RouterLink>
+              <a class="nav-link active" aria-current="page" href="#" 
+              v-on:click="goToAnotherPage('/translatorList')">Translator</a>
             </li>
             <li class="nav-item">
-              <RouterLink class="nav-link" to="/documentList">Document</RouterLink>
+              <a class="nav-link active" aria-current="page" href="#" 
+              v-on:click="goToAnotherPage('/documentList')">Document</a>
             </li>
           </ul>
         </div>
@@ -25,39 +47,19 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <style>
+
 .navbar {
-  background-color: #F86011 !important;
-  margin-bottom: 24px;
-  max-height: 70px;
+  background-color: #F86011 !important; 
 }
 
-.container-fluid {
-  margin-left: 20px;
-}
+@media (min-width: 768px) {
 
-.brand,
-.nav-link {
-  color: white;
-}
+  .navbar {
+    height: 55px;
+  }
 
-.nav-link {
-  border-radius: 5px;
-  margin-left: 30px;
-}
-
-.nav-link:hover {
-  background-color: white !important;
-  color: #F86011 !important;
-}
-
-.nav-link:visited {
-  color: white;
-}
-
-.brand {
-  font-size: 17px;
-  font-weight: 500;
-  text-align: center;
-  margin-bottom: 4px;
+  .navbar-brand {
+    padding-top: 2px;
+  }
 }
 </style>
