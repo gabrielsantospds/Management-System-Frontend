@@ -80,7 +80,12 @@ export default {
                 })
             } catch (error) {
                 this.resetButtonText()
-                console.log(error)
+                if (errorCode === 500) {
+                    // Error code 500 means that an error occurred while reading the file
+
+                    // Changes the hasError value to show an alert message
+                    this.hasError = true
+                }
             }
 
         },
@@ -198,6 +203,13 @@ export default {
             </div>
 
             <div v-if="!isEdit">
+                <!-- Alert message shown when the email sent does not exist in the databse -->
+                <div id="header-content-doc">
+                    <div class="alert alert-danger alert-dismissible" role="alert" v-if="hasError">
+                        <div>An error occurred while reading the file. Check the file formatting</div>
+                        <button type="button" class="btn-close" v-on:click="closeAlert"></button>
+                    </div>
+                </div>
                 <form novalidate class="needs-validation">
                     <div class="mb-3 file-content">
                         <label for="formFile" class="form-label">Ex: document.csv</label>
