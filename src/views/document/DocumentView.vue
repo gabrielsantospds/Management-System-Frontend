@@ -184,12 +184,18 @@ export default {
                 It is not allowed to save the email of a translator who is not registered.
             </p>
 
-            <p class="lead" v-else>
-                Only documents whose email if from a registered translator will be saved. <br>
+            <div v-else>
 
-                The accepted format is .csv and the file must contain the columns: subject, content,
-                locale, author.
-            </p>
+                <p class="lead">
+                    Only documents whose email if from a registered translator will be saved.
+                </p>
+                <p class="lead">
+                    The accepted format is .csv and the file must contain the columns: subject, content, author.
+                </p>
+                <p class="lead">
+                    The language and locale of the document content will be identified through artificial intelligence
+                </p>
+            </div>
 
             <div v-if="!isEdit">
                 <form novalidate class="needs-validation">
