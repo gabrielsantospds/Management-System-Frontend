@@ -80,6 +80,7 @@ export default {
                 })
             } catch (error) {
                 this.resetButtonText()
+                const errorCode = error.response.status
                 if (errorCode === 500) {
                     // Error code 500 means that an error occurred while reading the file
 
