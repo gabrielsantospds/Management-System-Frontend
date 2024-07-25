@@ -254,6 +254,6 @@ export default {
 }
 
 #icon-next, #icon-previous {
-    color: gray !important;
+    color: gray;
 }
 </style>
