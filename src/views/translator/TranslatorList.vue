@@ -202,14 +202,14 @@ export default {
                 <span class="icon-button" id="icon-button-previous" title="Previous Page"
                     v-on:click.prevent="previousPage">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                        class="bi bi-caret-left-square-fill" id="icon-previous" viewBox="0 0 16 16">
+                        class="bi bi-caret-left-square-fill icon-img" id="icon-previous" viewBox="0 0 16 16">
                         <path
                             d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm10.5 10V4a.5.5 0 0 0-.832-.374l-4.5 4a.5.5 0 0 0 0 .748l4.5 4A.5.5 0 0 0 10.5 12" />
                     </svg>
                 </span>
                 <span class="icon-button" id="icon-button-next" title="Next Page" v-on:click.prevent="nextPage">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                        class="bi bi-caret-right-square-fill" id="icon-next" viewBox="0 0 16 16">
+                        class="bi bi-caret-right-square-fill icon-img" id="icon-next" viewBox="0 0 16 16">
                         <path
                             d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm5.5 10a.5.5 0 0 0 .832.374l4.5-4a.5.5 0 0 0 0-.748l-4.5-4A.5.5 0 0 0 5.5 4z" />
                     </svg>
@@ -271,7 +271,7 @@ export default {
     gap: 15px;
 }
 
-#icon-next, #icon-previous {
+.icon-img {
     color: gray;
 }
 

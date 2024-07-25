@@ -253,7 +253,7 @@ export default {
     gap: 15px;
 }
 
-#icon-next, #icon-previous {
+.icon-img {
     color: gray;
 }
 </style>
