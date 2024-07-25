@@ -271,7 +271,8 @@ export default {
     gap: 15px;
 }
 
-.bi {
+#icon-next, #icon-previous {
     color: gray !important;
 }
+
 </style>

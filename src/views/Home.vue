@@ -60,8 +60,8 @@ export default {
     padding-top: 0px !important;
 }
 
-.big-content {
-    padding: 48px 120px !important;
+.bg-body-tertiary {
+    padding: 4% 10% !important;
 }
 
 .display-5 {
