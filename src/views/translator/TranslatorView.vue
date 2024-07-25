@@ -38,11 +38,11 @@ export default {
         let alertTitle = ''
         this.changeButtonText()
         if (this.isEdit) {
-          await axios.put(`http://localhost:8080/translator/${this.id}`,
+          await axios.put(`https://management-system-backend-ic3p.onrender.com/translator/${this.id}`,
             this.translator);
             alertTitle = 'Translator updated successfully'
         } else {
-          await axios.post('http://localhost:8080/translator', this.translator);
+          await axios.post('https://management-system-backend-ic3p.onrender.com/translator', this.translator);
           alertTitle = 'Translator saved successfully'
         }
 
@@ -80,7 +80,7 @@ export default {
     async fetchTranslator() {
       try {
         // Gets translator data by id
-        const response = await axios.get(`http://localhost:8080/translator/${this.id}`)
+        const response = await axios.get(`https://management-system-backend-ic3p.onrender.com/translator/${this.id}`)
         const translatorReturned = response.data
         this.translator = translatorReturned
       } catch (error) {

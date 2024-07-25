@@ -33,7 +33,7 @@ export default {
 
     methods: {
         fetchTranslators() {
-            axios.get('http://localhost:8080/translators', {
+            axios.get('https://management-system-backend-ic3p.onrender.com/translators', {
                 params: {
                     // Passes the page number to get paginated data
                     page: this.currentPage
@@ -111,7 +111,7 @@ export default {
         async deleteTranslator(translatorId) {
             try {
                 await axios.delete(
-                    `http://localhost:8080/translator/${translatorId}`
+                    `https://management-system-backend-ic3p.onrender.com/translator/${translatorId}`
                 )
                 this.savedChanges = true
                 this.alertTitle = 'Translator deleted successfully'

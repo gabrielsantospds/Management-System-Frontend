@@ -36,7 +36,7 @@ export default {
         async editDocument() {
             try {
                 this.changeButtonText()
-                await axios.put(`http://localhost:8080/document/${this.id}`,
+                await axios.put(`https://management-system-backend-ic3p.onrender.com/document/${this.id}`,
                     this.document);
                     
                 // Redirects to the translator list
@@ -64,7 +64,7 @@ export default {
                 this.changeButtonText()
                 const formData = new FormData()
                 formData.append('file', file)
-                const response = await axios.post('http://localhost:8080/document', formData, {
+                const response = await axios.post('https://management-system-backend-ic3p.onrender.com/document', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
@@ -111,7 +111,7 @@ export default {
         async fetchDocument() {
             try {
                 // Gets document data by id
-                const response = await axios.get(`http://localhost:8080/document/${this.id}`)
+                const response = await axios.get(`https://management-system-backend-ic3p.onrender.com/document/${this.id}`)
                 const documentReturned = response.data
                 this.document = documentReturned
             } catch (error) {

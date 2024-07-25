@@ -32,7 +32,7 @@ export default {
 
     methods: {
         fetchDocuments() {
-            axios.get('http://localhost:8080/documents', {
+            axios.get('https://management-system-backend-ic3p.onrender.com/documents', {
                 params: {
                     // Passes the page number to get paginated data
                     page: this.currentPage
@@ -110,7 +110,7 @@ export default {
         async deleteDocument(documentId) {
             try {
                 await axios.delete(
-                    `http://localhost:8080/document/${documentId}`
+                    `https://management-system-backend-ic3p.onrender.com/document/${documentId}`
                 )
                 this.savedChanges = true
                 this.alertTitle = 'Document deleted successfully'
