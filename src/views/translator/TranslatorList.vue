@@ -272,6 +272,6 @@ export default {
 }
 
 .bi {
-    color: gray;
+    color: gray !important;
 }
 </style>
