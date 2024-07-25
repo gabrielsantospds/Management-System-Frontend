@@ -105,6 +105,12 @@ export default {
                 btnElement.textContent = 'Submit'
                 btnElement.disabled = false
             }
+        },
+
+        goBack() {
+          this.$router.replace({
+            path: '/translatorList'
+          })
         }
   },
   mounted() {
@@ -175,6 +181,7 @@ export default {
           </div>
         </div>
         <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+        <button type="button" class="btn btn-secondary cancel-button" v-on:click="goBack">Cancel</button>
       </form>
     </div>
   </main>
@@ -197,4 +204,11 @@ h1 {
 .submit-btn {
   margin-top: 20px !important;
 }
+
+.cancel-button {
+  position: relative !important;
+  top: 10px;
+  left: 20px;
+}
+
 </style>

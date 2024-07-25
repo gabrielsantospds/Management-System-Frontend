@@ -38,7 +38,7 @@ export default {
                 this.changeButtonText()
                 await axios.put(`https://management-system-backend-ic3p.onrender.com/document/${this.id}`,
                     this.document);
-                    
+
                 // Redirects to the translator list
                 this.$router.replace({
                     path: '/documentList',
@@ -149,6 +149,12 @@ export default {
                 btnElement.textContent = 'Submit'
                 btnElement.disabled = false
             }
+        },
+
+        goBack() {
+            this.$router.replace({
+                path: '/documentList'
+            })
         }
     },
     mounted() {
@@ -196,6 +202,7 @@ export default {
                         Please choose a file
                     </div>
                     <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+                    <button type="button" class="btn btn-secondary cancel-button" v-on:click="goBack">Cancel</button>
                 </form>
             </div>
             <div v-else>
@@ -244,6 +251,7 @@ export default {
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+                    <button type="button" class="btn btn-secondary cancel-button" v-on:click="goBack">Cancel</button>
                 </form>
             </div>
         </div>
@@ -276,6 +284,12 @@ h1 {
 
 .file-content {
     margin-bottom: 0px !important;
+}
+
+.cancel-button {
+    position: relative !important;
+    top: 10px;
+    left: 20px;
 }
 
 .submit-btn {
