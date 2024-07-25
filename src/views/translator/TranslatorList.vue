@@ -81,7 +81,7 @@ export default {
             // Validates the currentPage limit and changes the style of the next and previous page 
             // buttons to disable them in case there is no previous or next page available
             if (this.currentPage === 0) {
-                if (this.totalPages === 1) {
+                if (this.totalPages <= 1) {
                     this.setButtonStyle('default', 'default', 'gray', 'gray')
                 } else {
                     this.setButtonStyle('default', 'pointer', 'gray', '#333379')
@@ -265,10 +265,6 @@ export default {
     border-color: #333379 !important;
 }
 
-.icon-button {
-    cursor: pointer;
-}
-
 #icon-content-translator {
     display: flex;
     justify-content: flex-end;
@@ -276,6 +272,6 @@ export default {
 }
 
 .bi {
-    color: #333379;
+    color: gray;
 }
 </style>
