@@ -16,7 +16,7 @@ Bootstrap is used to create responsive interfaces with pleasant visual component
 Axios is used to make HTTP requests to the backend application. All action buttons are highlighted on the page to facilitate CRUD operations for translators and documents.
 
 <br>
-In order to run the application on your machine, enter the following commands in your prompt:
-cd project-name
-npm install
+In order to run the application on your machine, enter the following commands in your prompt: <br>
+cd project-name <br>
+npm install <br>
 npm run dev
