@@ -6,7 +6,7 @@ The application is hosted on Render,You can try it yourself by accessing https:/
 
 The backend URL is https://management-system-backend-ic3p.onrender.com
 
-NOTE: As it is a free hosting service, the speed of database operations may be reduced and the backend application may spin down with inactivity. If this happened you just need to access the backend URL and reload the page.
+NOTE: As it is a free hosting service, the speed of database operations may be reduced and the backend application may spin down with inactivity. If this happened you just need to access the backend URL and reload the page - It takes 1 to 2 minutes.
 
 <br>
 Vue.js is used to create a SPA with reactive components, separating the logic for each page. The framework provides several features such as a router, attribute binding, event listeners, and more.
